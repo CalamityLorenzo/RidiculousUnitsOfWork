@@ -128,10 +128,14 @@
     <Compile Include="Domain\PostHead.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Interfaces\IBlogContent.cs" />
+    <Compile Include="Interfaces\IBlogHeadersReader.cs" />
     <Compile Include="Interfaces\IBlogHeaders.cs" />
+    <Compile Include="Interfaces\IBlogMetaReader.cs" />
     <Compile Include="Interfaces\IBlogMeta.cs" />
-    <Compile Include="Interfaces\IReadonly.cs" />
-    <Compile Include="Interfaces\IUnitOfWork.cs" />
+    <Compile Include="Interfaces\IBlogContentReader.cs" />
+    <Compile Include="Interfaces\IReadonlyRepository.cs" />
+    <Compile Include="Interfaces\IReadWriteUnitOfWork.cs" />
+    <Compile Include="Interfaces\IReadWriteRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseReadRepository.cs" />
     <Compile Include="Repositories\BaseReadWriteRepository.cs" />

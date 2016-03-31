@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Posts.Models
 {
+    //bunch of projections
+
     public class PostInfo
     {
         public string Title { get; set; }

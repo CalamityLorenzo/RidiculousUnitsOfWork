@@ -8,7 +8,7 @@ using Geek.Blog.Db.Interfaces;
 
 namespace Geek.Blog.Db.Repositories
 {
-    public abstract class BaseReadWriteRepository<TEntity, TKey> : BaseReadRepository<TEntity, TKey>, IWriteRepository<TEntity, TKey> where TEntity : class
+    public abstract class BaseReadWriteRepository<TEntity, TKey> : BaseReadRepository<TEntity, TKey>, IReadWriteRepository<TEntity, TKey> where TEntity : class
     {
         public BaseReadWriteRepository(DbContext ctx) : base(ctx)
         {

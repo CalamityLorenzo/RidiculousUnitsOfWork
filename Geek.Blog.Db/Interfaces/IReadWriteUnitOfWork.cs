@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.Interfaces
 {
-   public interface IUnitOfWork
+   public interface IReadWriteUnitOfWork
     {
         IBlogContent PostBody { get; }
         IBlogHeaders PostHeader { get; }

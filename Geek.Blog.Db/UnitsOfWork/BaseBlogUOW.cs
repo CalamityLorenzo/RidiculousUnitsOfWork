@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.UnitsOfWork
 {
-    public abstract class BaseBlogUOW : IUnitOfWork, IDisposable
+    public abstract class BaseBlogUOW : IReadWriteUnitOfWork, IDisposable
     {
         readonly DbContext _ctx;
         private bool _completed;

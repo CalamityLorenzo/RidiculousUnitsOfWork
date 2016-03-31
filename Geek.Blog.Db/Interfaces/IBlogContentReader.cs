@@ -1,5 +1,4 @@
-﻿using Geek.Blog.Db.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.Interfaces
 {
-    public interface IBlogHeaders : IReadWriteRepository<PostHead, Guid>
+    interface IBlogContentReader : IReadonlyRepository<string, int>
     {
-
     }
 }
