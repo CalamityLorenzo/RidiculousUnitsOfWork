@@ -19,7 +19,7 @@ namespace PostsTestsApi
                 Console.WriteLine(item);
             }
 
-            var moreITems = bpi.GetPostInfoForMonth(items.Key,11);
+            var moreITems = bpi.GetPostInfoForMonth(items.Key,9);
 
             foreach(var item in moreITems)
             {

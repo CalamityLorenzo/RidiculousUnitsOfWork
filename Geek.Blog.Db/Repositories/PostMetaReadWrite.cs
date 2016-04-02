@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.Repositories
 {
-   public class PostMetaWrite :BaseReadWriteRepository<PostMetaData, int>,  IBlogMeta
+   public class PostMetaReadWrite :BaseReadWriteRepository<PostMetaData, int>,  IBlogMeta
     {
-        internal PostMetaWrite(DbContext ctx) :base(ctx)
+        internal PostMetaReadWrite(DbContext ctx) :base(ctx)
         {
 
         }

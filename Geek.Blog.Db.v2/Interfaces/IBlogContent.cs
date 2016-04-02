@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.Interfaces
 {
-    public interface IBlogContentReader : IReadonlyRepository<PostBody, int>
+    public interface IBlogContent: IRepository<PostBody, int>
     {
     }
 }

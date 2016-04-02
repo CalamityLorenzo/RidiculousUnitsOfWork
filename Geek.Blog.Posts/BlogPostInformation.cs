@@ -12,7 +12,7 @@ namespace Geek.Blog.Posts
 {
     public class BlogPostInformation
     {
-        private BaseBlogUOW uow;
+        private BaseReadWriteBlogUow uow;
         private IBlogMeta blogMetaData;
         public BlogPostInformation()
         {

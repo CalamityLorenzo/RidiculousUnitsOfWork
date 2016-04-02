@@ -44,7 +44,7 @@ namespace Geek.Blog.Db.Domain
         public string PostText { get; set; }
 
         public Guid PostId { get; set; }
-        public PostHead PostHeader { get; set; }
+        public virtual PostHead PostHeader { get; set; }
 
         public override string ToString()
         {

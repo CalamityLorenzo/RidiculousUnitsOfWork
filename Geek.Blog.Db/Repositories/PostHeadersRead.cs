@@ -9,16 +9,9 @@ using Microsoft.Data.Entity;
 
 namespace Geek.Blog.Db.Repositories
 {
-    //public class PostHeadersRead : BaseReadRepository<PostHead, Guid>, IBlogHeaders
-    //{
-    //    internal PostHeadersRead(DbContext ctx) : base(ctx)
-    //    {
-    //    }
-    //}
-
-    public class PostHeadersWrite : BaseReadWriteRepository<PostHead, Guid>, IBlogHeaders
+    public class PostHeadersRead : BaseReadRepository<PostHead, Guid>, IBlogHeadersReader
     {
-        internal PostHeadersWrite(DbContext ctx) : base(ctx)
+        internal PostHeadersRead(DbContext ctx) : base(ctx)
         {
         }
     }

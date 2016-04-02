@@ -1,18 +1,19 @@
 ﻿using Geek.Blog.Db.Domain;
 using Geek.Blog.Db.Interfaces;
+using Microsoft.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Data.Entity;
 
 namespace Geek.Blog.Db.Repositories
 {
-    public class PostBodyRead : BaseReadRepository<PostBody, int>, IBlogContentReader
+    public class PostMetaRead : BaseReadRepository<PostMetaData, int>, IBlogMetaReader
     {
-        internal PostBodyRead(DbContext ctx) : base(ctx)
+        internal PostMetaRead(DbContext ctx) : base(ctx)
         {
+
         }
     }
 }

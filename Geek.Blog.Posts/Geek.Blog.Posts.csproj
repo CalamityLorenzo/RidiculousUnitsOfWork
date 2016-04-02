@@ -46,9 +46,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Geek.Blog.Db\Geek.Blog.Db.csproj">
+    <ProjectReference Include="..\Geek.Blog.Db\Geek.Blog.Db.v1.csproj">
       <Project>{e3e008f5-ca1a-43f3-b636-4a37a9f350e5}</Project>
-      <Name>Geek.Blog.Db</Name>
+      <Name>Geek.Blog.Db.v1</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
