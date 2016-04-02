@@ -1,5 +1,5 @@
-﻿using Geek.Blog.Db.Context;
-using Geek.Blog.Db.Interfaces;
+﻿using Geek.Blog.Db.Interfaces;
+using Geek.Blog.Db.UnitOfWork;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using System;
@@ -13,21 +13,17 @@ namespace Geek.Blog.Db.UnitsOfWork
 {
     public static class UnitOfWorkFactory
     {
-        public static IReadonlyUnitOfWork Readonly()
+        public static IUnitOfWork Readonly()
         {
-            return GetUnitOfWork<BlogReadUow, BlogContext> ("Readonly");
+            return GetUnitOfWork<BlogUnitOfWork, BlogContext> ("Readonly");
         }
 
-        public static IReadWriteUnitOfWork ReadWrite()
+        public static IUnitOfWork ReadWrite()
         {
-            return GetUnitOfWork<BlogReadWriteUow, BlogContext>("ReadWrite");
+            return GetUnitOfWork<BlogUnitOfWork, BlogContext>("ReadWrite");
         }
 
-        public static IReadWriteUnitOfWork DestoryToRecreate()
-        {
-            return GetUnitOfWork<BlogReadWriteUow, RecreateBlogContext>("ReadWrite");
-        }
-
+       
         public static void RecreateDb()
         {
             var s = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
@@ -40,22 +36,18 @@ namespace Geek.Blog.Db.UnitsOfWork
             }
         }
 
-        private static Uow GetUnitOfWork<Uow, C>(string connectionName) where Uow : class, IUnitOfWork where C: BlogContext
+        private static TUnitOfWork GetUnitOfWork<TUnitOfWork, C>(string connectionName) where TUnitOfWork : class, IUnitOfWork where C: BlogContext
         {
             var connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
             opts.UseSqlServer(connectionString);
 
             var ctx = GetContext<C>();
-            if (typeof(Uow) == typeof(BlogReadUow))
+            if (typeof(TUnitOfWork) == typeof(BlogUnitOfWork))
             {
-                return new BlogReadUow(ctx(opts.Options)) as Uow;
+                return new BlogUnitOfWork(ctx(opts.Options)) as TUnitOfWork;
             }
-            if (typeof(Uow) == typeof(BlogReadWriteUow))
-            {
-                return new BlogReadWriteUow(ctx(opts.Options)) as Uow;
-            }
-
+           
             throw new ArgumentOutOfRangeException("Cannot construct Uow");
         }
 
@@ -65,13 +57,7 @@ namespace Geek.Blog.Db.UnitsOfWork
             {
                 return (opts) => new BlogContext(opts) as C;
             }
-            else
-            {
-                if (typeof(C) == typeof(RecreateBlogContext))
-                {
-                    return (opts) => new RecreateBlogContext(opts) as C;
-                }
-            }
+           
 
             throw new ArgumentOutOfRangeException("Cannot construct dbContext");
         }

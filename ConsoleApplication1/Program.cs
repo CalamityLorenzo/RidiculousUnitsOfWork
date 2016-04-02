@@ -7,7 +7,6 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
             DataGen gd = new DataGen(50);
-
         }
 
 

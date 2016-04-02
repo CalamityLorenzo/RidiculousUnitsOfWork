@@ -49,13 +49,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Geek.Blog.Db\Geek.Blog.Db.v1.csproj">
-      <Project>{e3e008f5-ca1a-43f3-b636-4a37a9f350e5}</Project>
-      <Name>Geek.Blog.Db.v1</Name>
-    </ProjectReference>
+    <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <ProjectReference Include="..\Geek.Blog.Db.v2\Geek.Blog.Db.v2.csproj">
+      <Project>{018535dd-a4f0-4e63-bc58-78482954a346}</Project>
+      <Name>Geek.Blog.Db.v2</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

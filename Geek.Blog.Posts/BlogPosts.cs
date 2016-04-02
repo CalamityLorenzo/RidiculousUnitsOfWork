@@ -13,9 +13,9 @@ namespace Geek.Blog.Posts
     public class BlogPosts
     {
 
-        private IReadWriteUnitOfWork _dbCtx;
+        private IUnitOfWork _dbCtx;
 
-        private IReadWriteUnitOfWork dbCtx
+        private IUnitOfWork dbCtx
         {
             get
             {
@@ -36,7 +36,7 @@ namespace Geek.Blog.Posts
 
         }
 
-        internal BlogPosts(IReadWriteUnitOfWork readWrite)
+        internal BlogPosts(IUnitOfWork readWrite)
         {
             dbCtx = readWrite;
         }

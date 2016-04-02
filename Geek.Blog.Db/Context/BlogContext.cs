@@ -8,11 +8,12 @@ namespace Geek.Blog.Db.Context
     {
        public BlogContext(DbContextOptions opts) : base(opts)
         {}
-
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             ;
+            
             // optionsBuilder.UseSqlServer("Data Source=.\\SQLEXPRESS;Inital Catalog=pclBlogDb;Integrated Security=True");
         }
 

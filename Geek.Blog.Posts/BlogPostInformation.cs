@@ -12,8 +12,8 @@ namespace Geek.Blog.Posts
 {
     public class BlogPostInformation
     {
-        private IReadonlyUnitOfWork uow;
-        private IBlogMetaReader blogMetaData;
+        private IUnitOfWork uow;
+        private IBlogMeta blogMetaData;
         public BlogPostInformation()
         {
             this.uow = UnitOfWorkFactory.Readonly();

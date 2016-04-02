@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.Interfaces
 {
-    public interface IReadWriteUnitOfWork : IUnitOfWork
+    public interface IUnitOfWork: IDisposable
     {
         IBlogContent PostBody { get; }
         IBlogHeaders PostHeader { get; }
         IBlogMeta PostMetaData { get; }
+        void Complete();
     }
 }

@@ -13,20 +13,20 @@ namespace PostsTestsApi
     {
         static void Main(string[] args)
         {
-            //BlogPostInformation bpi = new BlogPostInformation();
-            //var items = bpi.GetAvailablePostsCountByYear(2014);
+            BlogPostInformation bpi = new BlogPostInformation();
+            var items = bpi.GetAvailablePostsCountByYear(2016);
 
-            //foreach (var item in items)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            foreach (var item in items)
+            {
+                Console.WriteLine(item);
+            }
 
-            //var moreITems = bpi.GetPostInfoForMonth(items.Key,9);
+            var moreITems = bpi.GetPostInfoForMonth(items.Key, 4);
 
-            //foreach(var item in moreITems)
-            //{
-            //    Console.WriteLine(item);
-            //}
+            foreach (var item in moreITems)
+            {
+                Console.WriteLine(item);
+            }
 
 
             //            var newPost = new NewBlogPost("Wiggle", "hitler-hifive-string", "The rag of winds, plauged his heart. under.", @"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ullamcorper hendrerit condimentum. Nulla sapien neque, ullamcorper ac lorem id, egestas congue ligula. Donec nisl felis, interdum sit amet arcu et, sollicitudin consequat purus. Mauris posuere, tortor quis gravida hendrerit, elit lacus tempus quam, pellentesque hendrerit dolor lectus feugiat odio. Proin eget laoreet diam. Phasellus eget metus rutrum, pellentesque odio ut, molestie est. Praesent in interdum urna, nec aliquam erat. Cras at enim fermentum, varius orci ut, placerat nisi. Donec scelerisque lacus at congue accumsan.
@@ -38,8 +38,8 @@ namespace PostsTestsApi
             //            var posts = new BlogPosts();
             //            posts.CreateNewPost(newPost);
 
-            DataGenerator Dg = new DataGenerator();
-            Dg.RecreateDb(50);
+            //DataGenerator Dg = new DataGenerator();
+            //Dg.RecreateDb(50);
         }
     }
 }

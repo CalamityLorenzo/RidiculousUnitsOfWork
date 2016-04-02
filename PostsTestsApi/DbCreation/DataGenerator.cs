@@ -16,11 +16,12 @@ namespace PostsTestsApi.DbCreation
             Random rand = new Random();
             DictionaryReader dr = new DictionaryReader();
             List<NewBlogPost> NewPosts = new List<NewBlogPost>();
+
             for (var x = 0; x < count; ++x)
             {
                 var wordsPerTitle = rand.Next(4, 12);
                 List<string> myTitle = new List<string>(GetChunkOfWords(rand, wordsPerTitle));
-                
+
                 // random words for a title
                 String Title = String.Join(" ", myTitle.ToArray());
                 Title = Title.Trim().Substring(0, (Title.Length > 128) ? 128 : Title.Length);
