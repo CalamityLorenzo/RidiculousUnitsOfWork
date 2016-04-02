@@ -150,6 +150,7 @@
     <Compile Include="Repositories\PostMetaReadWrite.cs" />
     <Compile Include="UnitsOfWork\BlogReadUow.cs" />
     <Compile Include="UnitsOfWork\BlogReadWriteUow.cs" />
+    <Compile Include="UnitsOfWork\UnitOfWorkFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

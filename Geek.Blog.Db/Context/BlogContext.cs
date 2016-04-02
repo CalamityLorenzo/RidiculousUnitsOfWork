@@ -2,17 +2,12 @@
 using Microsoft.Data.Entity.Infrastructure;
 using Geek.Blog.Db.Domain;
 
-namespace Geek.Blog.Db
+namespace Geek.Blog.Db.Context
 {
     internal class BlogContext : DbContext
     {
-        private static bool _created = false;
-
-        public BlogContext(DbContextOptions opts) : base(opts)
-        {
-           //Database.EnsureDeleted();
-           //Database.EnsureCreated();
-        }
+       public BlogContext(DbContextOptions opts) : base(opts)
+        {}
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,7 +23,7 @@ namespace Geek.Blog.Db
             modelBuilder.Entity<PostHead>().ToTable("PostsHeader");
             modelBuilder.Entity<PostHead>().Property(o => o.Title).HasMaxLength(128);
             modelBuilder.Entity<PostHead>().Property(o => o.Url).HasMaxLength(255);
-            modelBuilder.Entity<PostHead>().HasIndex(o => o.Url).IsUnique(true);// HasIndex(o => o.Url).IsUnique(true);
+            modelBuilder.Entity<PostHead>().HasIndex(o => o.Url).IsUnique(true);
             modelBuilder.Entity<PostHead>().HasOne(o => o.PostMeta).WithOne(p=>p.PostHeader).HasForeignKey<PostMetaData>(o => o.PostId);
 
             modelBuilder.Entity<PostMetaData>().HasKey(o => o.MetaDataId);

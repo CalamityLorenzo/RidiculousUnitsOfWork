@@ -1,4 +1,5 @@
 ﻿using Geek.Blog.Db.Domain;
+using Geek.Blog.Db.Interfaces;
 using Geek.Blog.Db.UnitsOfWork;
 using System;
 using System.Collections.Generic;
@@ -44,7 +45,7 @@ Aliquam vel volutpat velit, ornare fringilla metus. Sed ipsum tellus, iaculis et
 
             var PostMeta = new List<PostMetaData>();
 
-            using (BlogReadWriteUow uow = new BlogReadWriteUow())
+            using (IReadWriteUnitOfWork uow = UnitOfWorkFactory.ReadWrite())
             {
                 uow.PostHeader.AddRange(PostHeaders);
 

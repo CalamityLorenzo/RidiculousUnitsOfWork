@@ -12,11 +12,11 @@ namespace Geek.Blog.Posts
 {
     public class BlogPostInformation
     {
-        private BaseReadWriteBlogUow uow;
-        private IBlogMeta blogMetaData;
+        private IReadonlyUnitOfWork uow;
+        private IBlogMetaReader blogMetaData;
         public BlogPostInformation()
         {
-            this.uow = new BlogReadWriteUow();
+            this.uow = UnitOfWorkFactory.Readonly();
             this.blogMetaData = uow.PostMetaData;
         }
 

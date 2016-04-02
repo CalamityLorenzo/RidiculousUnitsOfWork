@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.UnitsOfWork
 {
-    public class BlogReadUow : IReadonlyUnitOfWork, IDisposable
+    public class BlogReadUow : IReadonlyUnitOfWork
     {
         protected readonly DbContext _ctx;
        
-        public BlogReadUow(DbContext ctx)
+        internal BlogReadUow(DbContext ctx)
         {
             this._ctx = ctx;
             PostBody = new PostBodyRead(_ctx);

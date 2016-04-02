@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BlogPostInformation.cs" />
+    <Compile Include="BlogPosts.cs" />
+    <Compile Include="Management\BlogDbManagement.cs" />
+    <Compile Include="Models\BlogPost.cs" />
     <Compile Include="Models\PostInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

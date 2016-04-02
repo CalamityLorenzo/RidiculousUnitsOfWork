@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.UnitsOfWork
 {
-    public class BlogReadWriteUow : IReadWriteUnitOfWork, IDisposable
+    public class BlogReadWriteUow : IReadWriteUnitOfWork
     {
         private readonly DbContext _ctx;
         private bool _complete = false; 
-        public BlogReadWriteUow(DbContext ctx)
+        internal BlogReadWriteUow(DbContext ctx)
         {
             this._ctx = ctx;
             this.PostBody = new PostBodyReadWrite(_ctx);
