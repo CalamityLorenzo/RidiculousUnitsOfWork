@@ -15,8 +15,9 @@ namespace Geek.Blog.Db.Context
         {
             if (!_created)
             {
-                Database.EnsureDeleted();
+              //  Database.EnsureDeleted();
                 Database.EnsureCreated();
+                _created = true;
             }
         }
     }

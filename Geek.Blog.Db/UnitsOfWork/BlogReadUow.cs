@@ -29,7 +29,7 @@ namespace Geek.Blog.Db.UnitsOfWork
 
         public void Complete()
         {
-            throw new NotImplementedException("Hans, boob-e. Read only");
+            throw new NotImplementedException("Hans, bubby. Read only");
         }
 
         public void Dispose()

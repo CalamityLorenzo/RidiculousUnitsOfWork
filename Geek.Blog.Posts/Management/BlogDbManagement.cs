@@ -12,10 +12,9 @@ namespace Geek.Blog.Posts.Management
     {
         public static void RecreateDb(IEnumerable<NewBlogPost> Posts)
         {
-            using (var unitOfWork = UnitOfWorkFactory.DestoryToRecreate())
-            {
-                
-            }
+            var deleteToRec = UnitOfWorkFactory.DestoryToRecreate();
+            BlogPosts bp = new BlogPosts(deleteToRec);
+            bp.CreateNewPosts(Posts);
         }
     }
 }

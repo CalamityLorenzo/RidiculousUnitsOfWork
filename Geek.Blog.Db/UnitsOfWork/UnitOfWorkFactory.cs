@@ -57,7 +57,7 @@ namespace Geek.Blog.Db.UnitsOfWork
             {
                 if (typeof(C) == typeof(RecreateBlogContext))
                 {
-                    return (opts) => new BlogContext(opts) as C;
+                    return (opts) => new RecreateBlogContext(opts) as C;
                 }
             }
 
