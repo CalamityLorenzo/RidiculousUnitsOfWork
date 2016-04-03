@@ -38,10 +38,8 @@ namespace PostsTestsApi.DbCreation
                 {
                     dtModifed = dtCreated.AddDays(rand.Next(1, 80));
                 }
-
                 var wordsForIntro = rand.Next(2, 42);
                 List<string> myIntro = new List<string>(GetChunkOfWords(rand, wordsForIntro));
-
                 NewPosts.Add(new NewPost(Title, Url, String.Join(" ", myIntro), LoremText()));
             }
 
