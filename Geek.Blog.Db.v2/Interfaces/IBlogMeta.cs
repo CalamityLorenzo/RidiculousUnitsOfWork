@@ -12,5 +12,6 @@ namespace Geek.Blog.Db.Interfaces
         IEnumerable<PostMetaData> AllBlogsInfoForMonth(int year, int month);
         IEnumerable<string> AllMonthNamesForYear(int year);
         PostMetaData PostInfoForUrl(string postUrl);
+        IEnumerable<int> AvailableYears();
     }
 }

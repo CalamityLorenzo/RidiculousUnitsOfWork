@@ -42,9 +42,9 @@ namespace Geek.Blog.Posts
             dbCtx = readWrite;
         }
 
-        public void CreateNewPosts(IEnumerable<NewPost> posts)
+        public void CreateNewPosts(IEnumerable<CompletePost> posts)
         {
-            foreach(var post in posts)
+            foreach (var post in posts)
             {
                 CreatePost(post);
             }
@@ -53,45 +53,33 @@ namespace Geek.Blog.Posts
             dbCtx = null;
         }
 
-        private void CreatePost(NewPost newPost)
+        private void CreatePost(CompletePost post)
         {
             // create this in stages
             var postHead = new PostHead
             {
-                Title = newPost.Title,
-                Url = newPost.Url,
-                PostMeta = new PostMetaData { IntroText = newPost.Intro }
+                Title = post.Title,
+                Url = post.Url,
+                PostMeta = new PostMetaData { IntroText = post.Intro, DateCreated = post.DateCreated, LastModifed = post.LastModified }
             };
 
             dbCtx.PostHeader.Add(postHead);
             var postContent = new PostBody
             {
-                PostText = newPost.Body,
+                PostText = post.Body,
                 PostId = postHead.PostId
             };
-            dbCtx.PostBody.Add(postContent);
+            
         }
 
-        public void CreateNewPost(NewPost newPost)
-        {
-            try
-            {
-                CreatePost(newPost);
-                dbCtx.Complete();
-            }
-            finally
-            {
-                dbCtx.Dispose();
-                dbCtx = null;
-            }
-        }
+      
 
-        public Post GetPost(string url)
+        public CompletePost GetPost(string url)
         {
             var HeaderAndMeta = dbCtx.PostHeader.FindFirstOrDefault(o => o.Url == url);
             var PostBody = dbCtx.PostBody.FindFirstOrDefault(o => o.PostId == HeaderAndMeta.PostId);
 
-            return new Post(
+            return new CompletePost(
                 title: HeaderAndMeta.Title,
                 url: HeaderAndMeta.Url,
                 body: PostBody.PostText,

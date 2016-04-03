@@ -22,6 +22,11 @@ namespace Geek.Blog.Db.Repositories
             return Find(o => o.DateCreated.Year == year && o.DateCreated.Month == month).ToList();
         }
 
+        public IEnumerable<int> AvailableYears()
+        {
+            return this.Entities.GroupBy(o => o.DateCreated.Year).Select(o=>o.Key).OrderBy(o=>o).ToList();
+        }
+
         public IEnumerable<string> AllMonthNamesForYear(int year)
         {
            return Find(o => o.DateCreated.Year == year).

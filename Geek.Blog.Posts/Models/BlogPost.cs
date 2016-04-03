@@ -6,19 +6,33 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Posts.Models
 {
-    public class NewPost
+    public class CompletePost
     {
-        public NewPost()
-        {
-            this.DateCreated = DateTime.Now;
-        }
-        public NewPost(string title, string url, string intro, string body) :this()
+
+        public CompletePost(string title, string url, string intro, string body)
         {
             this.Intro = intro;
             this.Title = title;
             this.Body = body;
             this.Url = url;
             this.DateCreated = DateTime.Now;
+            this.LastModified = DateTime.Now;
+        }
+
+        public CompletePost(string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body)
+        {
+            this.DateCreated = created;
+            this.LastModified = lastModified;    
+        }
+
+        public CompletePost(string title, string url, string intro, string body, DateTime created)
+        {
+            this.Intro = intro;
+            this.Title = title;
+            this.Body = body;
+            this.Url = url;
+            this.DateCreated = created;
+            this.LastModified = DateTime.Now;
         }
 
         public string Title { get; private set; }
@@ -26,17 +40,7 @@ namespace Geek.Blog.Posts.Models
         public string Intro { get; private set; }
         public string Body { get; private set; }
         public DateTime DateCreated { get; protected set; }
-    }
-
-    public class Post : NewPost
-    {
-        public Post(string title, string url, string intro, string body, DateTime lastModified, DateTime created) : base(title, url, intro, body)
-        {
-            this.DateCreated = created;
-            this.LastModified = lastModified;    
-        }
-        DateTime LastModified { get; set; }
-        
+        public DateTime LastModified { get; protected set; }
 
     }
 }
