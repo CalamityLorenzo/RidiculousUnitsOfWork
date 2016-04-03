@@ -21,6 +21,11 @@ namespace Geek.Blog.Posts
             this.blogMetaData = uow.PostMetaData;
         }
 
+        public IEnumerable<int> GetAllAvailableYears()
+        {
+            return  this.blogMetaData.AvailableYears().ToList();
+        }
+
         public IGrouping<int, PostMonthCounts> GetAvailablePostsCountByYear(int year)
         {
             var allPostsInYear = this.blogMetaData.AllMonthNamesForYear(year);

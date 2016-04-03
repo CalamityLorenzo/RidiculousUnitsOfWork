@@ -15,9 +15,14 @@ namespace PostsTestsApi
         {
 
             bool rec = true;
-            Recreate(rec);
+            Recreate(rec, 750);
 
             BlogPostInformation bpi = new BlogPostInformation();
+            var years = bpi.GetAllAvailableYears();
+            foreach(var year in years)
+            {
+                Console.WriteLine(year);
+            }
             BlogPosts bPosts = new BlogPosts();
             var items = bpi.GetPostInfoForMonth(2016,4);
 
@@ -27,9 +32,9 @@ namespace PostsTestsApi
             //}
 
 
-            var newItem = bpi.GetPostInfoForUrl("disbowelling-crepuscles-distraite-departee");
-            var existingItem = bPosts.GetPost(newItem.Url);
-            Console.WriteLine(existingItem.Title);
+            //var newItem = bpi.GetPostInfoForUrl("disbowelling-crepuscles-distraite-departee");
+            //var existingItem = bPosts.GetPost(newItem.Url);
+            //Console.WriteLine(existingItem.Title);
 
             //var moreITems = bpi.GetPostInfoForMonth(items.Key, 4);
 
@@ -52,22 +57,24 @@ namespace PostsTestsApi
         }
 
 
-        static void Recreate(bool rec)
+        static void Recreate(bool rec, int numRecs)
         {
             if (rec)
             {
                 Console.WriteLine("Rebuilding Db");
                 Console.WriteLine("Press any key");
 
-                ConsoleKeyInfo kPress = Console.ReadKey();
+                ConsoleKeyInfo kPress = Console.ReadKey(true);
                 if (kPress.Key == ConsoleKey.Escape)
                 {
+                    Console.WriteLine("Skipping...");
                     return;
                 }
                 else
                 {
+                    Console.WriteLine("Here we go ${numRecs} being created");
                     DataGenerator Dg = new DataGenerator();
-                    Dg.RecreateDb(750);
+                    Dg.RecreateDb(numRecs);
                 }
 
             }

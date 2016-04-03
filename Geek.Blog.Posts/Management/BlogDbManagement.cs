@@ -10,7 +10,7 @@ namespace Geek.Blog.Posts.Management
 {
     public static class BlogDbManagement
     {
-        public static void RecreateDb(IEnumerable<NewPost> Posts)
+        public static void RecreateDb(IEnumerable<CompletePost> Posts)
         {
             UnitOfWorkFactory.RecreateDb();
 
