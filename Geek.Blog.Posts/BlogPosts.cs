@@ -12,9 +12,9 @@ namespace Geek.Blog.Posts
 {
     public class BlogPosts
     {
+        private bool ManageUowLife = false;
 
         private IUnitOfWork _dbCtx;
-
         private IUnitOfWork dbCtx
         {
             get
@@ -22,6 +22,7 @@ namespace Geek.Blog.Posts
                 if (_dbCtx == null)
                 {
                     _dbCtx = UnitOfWorkFactory.ReadWrite();
+                    ManageUowLife = true;
                 }
                 return _dbCtx;
             }
@@ -41,7 +42,7 @@ namespace Geek.Blog.Posts
             dbCtx = readWrite;
         }
 
-        public void CreateNewPosts(IEnumerable<NewBlogPost> posts)
+        public void CreateNewPosts(IEnumerable<NewPost> posts)
         {
             foreach(var post in posts)
             {
@@ -52,7 +53,7 @@ namespace Geek.Blog.Posts
             dbCtx = null;
         }
 
-        private void CreatePost(NewBlogPost newPost)
+        private void CreatePost(NewPost newPost)
         {
             // create this in stages
             var postHead = new PostHead
@@ -71,7 +72,7 @@ namespace Geek.Blog.Posts
             dbCtx.PostBody.Add(postContent);
         }
 
-        public void CreateNewPost(NewBlogPost newPost)
+        public void CreateNewPost(NewPost newPost)
         {
             try
             {
@@ -85,5 +86,19 @@ namespace Geek.Blog.Posts
             }
         }
 
+        public Post GetPost(string url)
+        {
+            var HeaderAndMeta = dbCtx.PostHeader.FindFirstOrDefault(o => o.Url == url);
+            var PostBody = dbCtx.PostBody.FindFirstOrDefault(o => o.PostId == HeaderAndMeta.PostId);
+
+            return new Post(
+                title: HeaderAndMeta.Title,
+                url: HeaderAndMeta.Url,
+                body: PostBody.PostText,
+                intro:HeaderAndMeta.PostMeta.IntroText,
+                lastModified: HeaderAndMeta.PostMeta.LastModifed,
+                created: HeaderAndMeta.PostMeta.LastModifed
+                );
+        }
     }
 }

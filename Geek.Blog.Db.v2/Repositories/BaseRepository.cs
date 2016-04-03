@@ -34,7 +34,7 @@ namespace Geek.Blog.Db.Repositories
             return this.Entities.ToList();
         }
 
-        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
+        public virtual IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return this.Entities.Where(predicate);
         }

@@ -14,6 +14,7 @@ namespace Geek.Blog.Posts
     {
         private IUnitOfWork uow;
         private IBlogMeta blogMetaData;
+
         public BlogPostInformation()
         {
             this.uow = UnitOfWorkFactory.Readonly();
@@ -22,8 +23,7 @@ namespace Geek.Blog.Posts
 
         public IGrouping<int, PostMonthCounts> GetAvailablePostsCountByYear(int year)
         {
-            var allPostsInYear = this.blogMetaData.Find(o => o.DateCreated.Year == year).
-                                Select(o => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(o.DateCreated.Month));
+            var allPostsInYear = this.blogMetaData.AllMonthNamesForYear(year);
             return new PostYearMonthCounts(year, from allPosts in allPostsInYear
                                                  group allPosts by allPosts into grpPosts
                                                  select new PostMonthCounts(grpPosts.Key, grpPosts.Count()));
@@ -31,8 +31,7 @@ namespace Geek.Blog.Posts
 
         public IEnumerable<PostInfo> GetPostInfoForMonth(int year, int month)
         {
-            var allPostsInMonth = this.blogMetaData.Find(o => o.DateCreated.Year == year && o.DateCreated.Month == month);
-
+            var allPostsInMonth = this.blogMetaData.AllBlogsInfoForMonth(year, month);
             return new List<PostInfo>(from allPosts in allPostsInMonth
                                       select new PostInfo
                                       {
@@ -43,5 +42,19 @@ namespace Geek.Blog.Posts
                                           LastModifed = allPosts.LastModifed
                                       });
         }
+
+        public PostInfo GetPostInfoForUrl(string postUrl)
+        {
+            var postInfo = this.blogMetaData.PostInfoForUrl(postUrl);
+            return new PostInfo
+            {
+                Created = postInfo.DateCreated,
+                InfoText = postInfo.IntroText,
+                LastModifed = postInfo.LastModifed,
+                Title = postInfo.PostHeader.Title,
+                Url = postInfo.PostHeader.Url
+            };
+        }
+
     }
 }

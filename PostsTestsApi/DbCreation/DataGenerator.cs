@@ -11,12 +11,14 @@ namespace PostsTestsApi.DbCreation
 {
     class DataGenerator
     {
+        Random rand = new Random();
+        DictionaryReader dr = new DictionaryReader();
+
         public void RecreateDb(int count)
         {
-            Random rand = new Random();
-            DictionaryReader dr = new DictionaryReader();
-            List<NewBlogPost> NewPosts = new List<NewBlogPost>();
+            List<NewPost> NewPosts = new List<NewPost>();
 
+            var newDate = RandomDayFunc();
             for (var x = 0; x < count; ++x)
             {
                 var wordsPerTitle = rand.Next(4, 12);
@@ -28,11 +30,11 @@ namespace PostsTestsApi.DbCreation
                 var urlTotal = String.Join("-", myTitle.ToArray());
 
                 String Url = urlTotal.Substring(0, (urlTotal.Length > 255) ? 255 : Title.Length);
-                DateTime dtCreated = new DateTime(rand.Next(2012, 2016), rand.Next(1, 12), rand.Next(1, 28));
+                DateTime dtCreated = newDate();
                 DateTime dtModifed = dtCreated;
                 var next = rand.Next(1, 10);
                 // shouldwe change the modified date?
-                if (next > 8)
+                if (next > 6)
                 {
                     dtModifed = dtCreated.AddDays(rand.Next(1, 80));
                 }
@@ -40,11 +42,19 @@ namespace PostsTestsApi.DbCreation
                 var wordsForIntro = rand.Next(2, 42);
                 List<string> myIntro = new List<string>(GetChunkOfWords(rand, wordsForIntro));
 
-                NewPosts.Add(new NewBlogPost(Title, Url, String.Join(" ", myIntro), LoremText()));
+                NewPosts.Add(new NewPost(Title, Url, String.Join(" ", myIntro), LoremText()));
             }
 
             BlogDbManagement.RecreateDb(NewPosts);
 
+        }
+
+        Func<DateTime> RandomDayFunc()
+        {
+            DateTime start = new DateTime(2012, 1, 1);
+            Random gen = new Random();
+            int range = ((TimeSpan)(DateTime.Today - start)).Days;
+            return () => start.AddDays(gen.Next(range));
         }
 
         IEnumerable<string> GetChunkOfWords(Random rand, int numberOfWords)

@@ -16,11 +16,10 @@ namespace Geek.Blog.Posts.Models
         public string InfoText { get; set; }
         public DateTime Created { get; set; }
         public DateTime LastModifed { get; set; }
-
-
         public override string ToString()
         {
-            return "${Title} {InfoText.Substring(0,50)} {Created.ToShortDateString()}";
+            var infoData = InfoText.Length;
+            return $"{Title} {InfoText.Substring(0,infoData>50?50:infoData)} {Created.ToShortDateString()}";
         }
     }
 
