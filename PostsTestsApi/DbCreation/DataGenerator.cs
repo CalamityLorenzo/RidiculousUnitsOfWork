@@ -16,7 +16,7 @@ namespace PostsTestsApi.DbCreation
 
         public void RecreateDb(int count)
         {
-            List<NewPost> NewPosts = new List<NewPost>();
+            List<CompletePost> NewPosts = new List<CompletePost>();
 
             var newDate = RandomDayFunc();
             for (var x = 0; x < count; ++x)
@@ -40,7 +40,7 @@ namespace PostsTestsApi.DbCreation
                 }
                 var wordsForIntro = rand.Next(2, 42);
                 List<string> myIntro = new List<string>(GetChunkOfWords(rand, wordsForIntro));
-                NewPosts.Add(new NewPost(Title, Url, String.Join(" ", myIntro), LoremText()));
+                NewPosts.Add(new CompletePost(Title, Url, String.Join(" ", myIntro), LoremText()));
             }
 
             BlogDbManagement.RecreateDb(NewPosts);

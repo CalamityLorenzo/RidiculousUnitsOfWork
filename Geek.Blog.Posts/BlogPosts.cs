@@ -72,8 +72,6 @@ namespace Geek.Blog.Posts
             
         }
 
-      
-
         public CompletePost GetPost(string url)
         {
             var HeaderAndMeta = dbCtx.PostHeader.FindFirstOrDefault(o => o.Url == url);
