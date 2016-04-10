@@ -4,27 +4,45 @@ using PostsTestsApi.DbCreation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace PostsTestsApi
 {
     class Program
     {
+
+        static RET GenericUsing<iDispable, RET>(Func<iDispable> statement, Func<iDispable, RET> BooomUse) where iDispable : IDisposable
+        {
+            using (var x = statement())
+            {
+                return BooomUse(x);
+            }
+        }
+
         static void Main(string[] args)
         {
 
-            bool rec = true;
-            Recreate(rec, 750);
+            //bool rec = true;
+            //Recreate(rec, 750);
 
-            BlogPostInformation bpi = new BlogPostInformation();
-            var years = bpi.GetAllAvailableYears();
-            foreach(var year in years)
-            {
-                Console.WriteLine(year);
-            }
-            BlogPosts bPosts = new BlogPosts();
-            var items = bpi.GetPostInfoForMonth(2016,4);
+            //BlogPostInformation bpi = new BlogPostInformation();
+            //var years = bpi.GetAllAvailableYears();
+            //foreach (var year in years)
+            //{
+            //    Console.WriteLine(year);
+            //}
+            //BlogPosts bPosts = new BlogPosts();
+            //var items = bpi.GetPostInfoForMonth(2016, 4);
+
+
+            var timeDoc = GenericUsing(
+                ()=>new WebClient(),
+                (client) => XDocument.Parse(client.DownloadString("http://time.gov/actualtime.cgi"))).Root.Attribute("time").Value;
+
+            Console.WriteLine(timeDoc);
 
             //foreach (var item in items)
             //{
