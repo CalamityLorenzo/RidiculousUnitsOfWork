@@ -59,7 +59,7 @@ namespace Geek.Blog.Db.Domain
     {
         public static CompletePost MapCompletePost(this PostBody @this)
         {
-            CompletePost cPost = new CompletePost(@this.PostHeader.Title, @this.PostHeader.Url, "", @this.PostText);
+            CompletePost cPost = new CompletePost(@this.PostHeader.Title, @this.PostHeader.Url, @this.PostHeader.PostMeta.IntroText, @this.PostText, @this.PostHeader.PostMeta.DateCreated, @this.PostHeader.PostMeta.LastModifed);
             return cPost;
         }
 

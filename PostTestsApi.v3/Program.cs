@@ -15,15 +15,15 @@ namespace PostTestsApi.v3
     {
         static void Main(string[] args)
         {
-         
-            using(IBlogUnitOfWork blg  = UnitOfWorkFactory.Instance.Readonly())
-            {
-            IPostService ps = new PostService(blg.Posts);
-                var postcPost = ps.GetPost(Guid.Parse("14E504A0-24FF-4C41-46B2-08D35BD7D2F1"));
 
+            using (IBlogUnitOfWork blg = UnitOfWorkFactory.Instance.Readonly())
+            {
+                IPostService ps = new PostService(blg.Posts);
+                //var postcPost = ps.GetPost(Guid.Parse("36C92209-B7A7-4B9F-7A38-08D35BB5E001")); //Guid.Parse("14E504A0-24FF-4C41-46B2-08D35BD7D2F1"));
+                var postcPost = ps.GetPost("waggon-fuse-tricorn-dimethyltryptamines-immunoelectrophoretically-brucine-paisley-loitering-inherences");
                 Console.WriteLine(postcPost.Title + " " + postcPost.Url);
             }
-               
+
 
         }
     }
