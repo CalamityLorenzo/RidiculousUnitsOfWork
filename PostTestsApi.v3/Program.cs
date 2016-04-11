@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using Geek.Blog.Posts.Services;
 using Geek.Blog.Db.Repositories;
+using Geek.Blog.Db.UnitOfWork;
 
 namespace PostTestsApi.v3
 {
@@ -14,7 +15,12 @@ namespace PostTestsApi.v3
     {
         static void Main(string[] args)
         {
-            
+         
+            using(IBlogUnitOfWork blg  = UnitOfWorkFactory.Instance.Readonly())
+            {
+               
+            }
+               
             IPostService ps = new PostService(new SqlPostRepository());
 
         }

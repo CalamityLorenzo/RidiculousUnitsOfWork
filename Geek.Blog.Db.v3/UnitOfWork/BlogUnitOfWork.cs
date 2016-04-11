@@ -1,4 +1,5 @@
-﻿using Geek.Blog.Posts.Interfaces;
+﻿using Geek.Blog.Db.Repositories;
+using Geek.Blog.Posts.Interfaces;
 using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using System;
@@ -12,18 +13,24 @@ namespace Geek.Blog.Db.UnitOfWork
 {
     public class BlogUnitOfWork : IBlogUnitOfWork
     {
+        private bool hasSaved = false;
         private DbContext _ctx { get; }
-        internal BlogUnitOfWork(DbContext Context)
+        internal BlogUnitOfWork(DbContext Context):this()
         {
             _ctx = Context;
         }
 
         public BlogUnitOfWork()
         {
-            var connectionString = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
-            DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
-            opts.UseSqlServer(connectionString);
-            _ctx = new BlogContext(opts.Options);
+            if (_ctx == null)
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
+                DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
+                opts.UseSqlServer(connectionString);
+                _ctx = new BlogContext(opts.Options);
+            }
+
+            this.Posts = new SqlPostRepository();
         }
 
         public IPostInfo PostInfo
@@ -34,7 +41,8 @@ namespace Geek.Blog.Db.UnitOfWork
             }
         }
 
-        public IPosts Posts
+        public IPosts Posts { get; }
+        public ITags Tags
         {
             get
             {
@@ -42,11 +50,23 @@ namespace Geek.Blog.Db.UnitOfWork
             }
         }
 
-        public ITags Tags
+        public void Complete()
         {
-            get
+            _ctx.SaveChanges();
+            hasSaved = true;
+
+        }
+
+        public void Dispose()
+        {
+            if (_ctx != null)
             {
-                throw new NotImplementedException();
+                if (hasSaved != true)
+                {
+                    _ctx.SaveChanges();
+                }
+                _ctx.Dispose();
+
             }
         }
     }

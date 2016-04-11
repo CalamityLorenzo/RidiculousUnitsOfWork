@@ -9,13 +9,4 @@ namespace Geek.Blog.Posts.Interfaces
         CompletePost GetPost(string Url);
         void UpdatePost(CompletePost post);
     }
-
-    public abstract class PostRepository : IPosts
-    {
-        public abstract CompletePost GetPost(string Url);
-
-        public abstract CompletePost GetPost(Guid Id);
-
-        public abstract void UpdatePost(CompletePost post);
-    }
 }

@@ -15,7 +15,6 @@ namespace Geek.Blog.Posts.Services
         IPosts Posts;
         public PostService(IPosts blogData)
         {
-            //  PostRepository pr = new SqlPostRepository();
             this.Posts = blogData;
         }
 

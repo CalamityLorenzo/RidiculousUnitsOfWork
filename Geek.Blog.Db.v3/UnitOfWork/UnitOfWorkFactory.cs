@@ -15,20 +15,19 @@ namespace Geek.Blog.Db.UnitOfWork
     public class UnitOfWorkFactory : IUnitOfWorkFactory
     {
         private UnitOfWorkFactory() { }
+        static UnitOfWorkFactory() { }
 
-        private UnitOfWorkFactory _factory;
-        
-        private UnitOfWorkFactory factory => _factory ?? (_factory = new UnitOfWorkFactory());
-
+        private static UnitOfWorkFactory _factory;
+        public static UnitOfWorkFactory Instance => _factory ?? (_factory = new UnitOfWorkFactory());
 
         public IBlogUnitOfWork Readonly()
         {
-            return factory.GetUnitOfWork<BlogUnitOfWork, BlogContext>("Readonly");
+            return Instance.GetUnitOfWork<BlogUnitOfWork, BlogContext>("Readonly");
         }
 
         public IBlogUnitOfWork ReadWrite()
         {
-            return factory.GetUnitOfWork<BlogUnitOfWork, BlogContext>("ReadWrite");
+            return Instance.GetUnitOfWork<BlogUnitOfWork, BlogContext>("ReadWrite");
         }
 
         public void RecreateDb()

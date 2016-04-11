@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Geek.Blog.Db.v3\Geek.Blog.Db.v3.csproj">
+      <Project>{7ddffceb-ce9d-45e0-87c8-2650929ceea3}</Project>
+      <Name>Geek.Blog.Db.v3</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Geek.Blog.Posts.v2\Geek.Blog.Posts.v3.csproj">
       <Project>{56f85125-a47f-4788-8dc2-220193ab52fb}</Project>
       <Name>Geek.Blog.Posts.v3</Name>
