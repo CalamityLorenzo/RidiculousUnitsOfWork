@@ -18,10 +18,12 @@ namespace PostTestsApi.v3
          
             using(IBlogUnitOfWork blg  = UnitOfWorkFactory.Instance.Readonly())
             {
-               
+            IPostService ps = new PostService(blg.Posts);
+                var postcPost = ps.GetPost(Guid.Parse("14E504A0-24FF-4C41-46B2-08D35BD7D2F1"));
+
+                Console.WriteLine(postcPost.Title + " " + postcPost.Url);
             }
                
-            IPostService ps = new PostService(new SqlPostRepository());
 
         }
     }

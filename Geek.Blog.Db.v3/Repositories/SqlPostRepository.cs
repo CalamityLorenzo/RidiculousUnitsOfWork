@@ -28,10 +28,10 @@ namespace Geek.Blog.Db.Repositories
             _ctx = new BlogContext(opts.Options);
         }
 
-        public  CompletePost GetPost(string Url)
+        public CompletePost GetPost(string Url)
         {
             var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Where(o => o.PostHeader.Url == Url).FirstOrDefault();
-            return (post == null) ? CompletePost.Empty() : CompletePost.Empty();
+            return (post == null) ? post.MapCompletePost() : CompletePost.Empty();
         }
 
         public  CompletePost GetPost(Guid Id)

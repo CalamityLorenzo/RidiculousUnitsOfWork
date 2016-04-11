@@ -59,7 +59,13 @@ namespace Geek.Blog.Db.Domain
     {
         public static CompletePost MapCompletePost(this PostBody @this)
         {
-            return CompletePost.Empty();
+            CompletePost cPost = new CompletePost(@this.PostHeader.Title, @this.PostHeader.Url, "", @this.PostText);
+            return cPost;
+        }
+
+        public static BlogPostInfo MapPostHeader(this PostHead @this)
+        {
+            return BlogPostInfo.Empty();
         }
     }
 }
