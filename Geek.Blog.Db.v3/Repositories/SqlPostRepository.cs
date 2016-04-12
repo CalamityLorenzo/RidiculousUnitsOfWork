@@ -13,6 +13,8 @@ namespace Geek.Blog.Db.Repositories
 {
     public class SqlPostRepository : IPosts
     {
+        private DbContext _ctx1;
+
         DbContext _ctx { get;}
 
         //internal SqlPostRepository(DbContext ctx)
@@ -26,6 +28,11 @@ namespace Geek.Blog.Db.Repositories
             DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
             opts.UseSqlServer(connectionString);
             _ctx = new BlogContext(opts.Options);
+        }
+
+        public SqlPostRepository(DbContext context)
+        {
+            this._ctx = context;
         }
 
         public CompletePost GetPost(string Url)

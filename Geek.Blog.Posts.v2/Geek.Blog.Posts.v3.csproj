@@ -42,6 +42,10 @@
   <ItemGroup>
     <Compile Include="DomainModel\BlogPost.cs" />
     <Compile Include="DomainModel\BlogPostInfo.cs" />
+    <Compile Include="DomainModel\BlogPostMonthCounts.cs" />
+    <Compile Include="DomainModel\PostInfoByMonth.cs" />
+    <Compile Include="DomainModel\PostInfoByYearMonth.cs" />
+    <Compile Include="DomainModel\PostYearMonthCounts.cs" />
     <Compile Include="Factories\IUnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IPostInfo.cs" />
     <Compile Include="Interfaces\IPosts.cs" />

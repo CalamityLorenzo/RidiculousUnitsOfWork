@@ -30,7 +30,7 @@ namespace Geek.Blog.Db.UnitOfWork
                 _ctx = new BlogContext(opts.Options);
             }
 
-            this.Posts = new SqlPostRepository();
+            this.Posts = new SqlPostRepository(_ctx);
         }
 
         public IPostInfo PostInfo
