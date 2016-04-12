@@ -37,14 +37,17 @@ namespace Geek.Blog.Db.Repositories
 
         public CompletePost GetPost(string Url)
         {
-            var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Where(o => o.PostHeader.Url == Url).FirstOrDefault();
-            return (post == null) ? post.MapCompletePost() : CompletePost.Empty();
+            var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).Where(o => o.PostHeader.Url == Url).FirstOrDefault();
+            return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
         }
 
         public  CompletePost GetPost(Guid Id)
         {
-            var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Where(o => o.PostHeader.PostId == Id).FirstOrDefault();
-            return (post == null) ? CompletePost.Empty() : CompletePost.Empty();
+
+            var count = _ctx.Set<PostBody>().Count();
+
+            var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Include(o=>o.PostHeader.PostMeta).Where(o => o.PostId== Id).FirstOrDefault();
+            return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
         }
 
         public  void UpdatePost(CompletePost post)
