@@ -22,5 +22,6 @@ namespace Geek.Blog.Db.Domain
 
         public Guid PostId { get; set; }
         public PostHead PostHeader { get; set; }
+
     }
 }

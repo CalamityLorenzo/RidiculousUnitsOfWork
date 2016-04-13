@@ -24,7 +24,7 @@ namespace Geek.Blog.Posts.Services
 
         public IGrouping<int, PostMonthCounts> GetAvailablePostCountByYear(int year)
         {
-            IEnumerable<string> postsForYear  = this.postInfo.AllMonthNamesforYear(year);
+            IEnumerable<string> postsForYear  = this.postInfo.GetAllMonthNamesforYear(year);
             return new PostYearMonthCounts(year, from posts in postsForYear
                                                  group posts by posts into grpPosts
                                                  select new PostMonthCounts(grpPosts.Key, grpPosts.Count()));
@@ -32,7 +32,7 @@ namespace Geek.Blog.Posts.Services
 
         public IEnumerable<BlogPostInfo> GetPostInfoForMonth(int year, int month)
         {
-            return this.postInfo.GetPostsForMonth(year, month);
+            return this.postInfo.GetAllPostsForMonth(year, month);
         }
 
         public BlogPostInfo GetPostInfo(string url)

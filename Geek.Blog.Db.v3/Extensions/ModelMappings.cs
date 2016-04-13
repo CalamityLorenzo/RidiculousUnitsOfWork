@@ -1,5 +1,6 @@
 ﻿using Geek.Blog.Db.Domain;
 using Geek.Blog.Posts.DomainModel;
+using Geek.Blog.Posts.DomainModel.Projections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace Geek.Blog.Db.Domain
             return cPost;
         }
 
-        public static BlogPostInfo MapPostHeader(this PostMetaData @this)
+        public static BlogPostInfo MapBlogPostInfo(this PostMetaData @this)
         {
             if (@this == null)
             {
@@ -28,11 +29,6 @@ namespace Geek.Blog.Db.Domain
             {
                 return new BlogPostInfo(@this.PostHeader.Title, @this.PostHeader.Url, @this.IntroText, @this.DateCreated, @this.LastModifed);
             }
-        }
-
-        public static PostMonthCounts MapPostMonthCount(this PostMetaData @this)
-        {
-            throw new NotImplementedException();
         }
     }
 }

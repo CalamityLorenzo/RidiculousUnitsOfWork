@@ -8,43 +8,25 @@ using Geek.Blog.Posts.DomainModel;
 using Microsoft.Data.Entity;
 using Geek.Blog.Db.Domain;
 using System.Configuration;
+using Microsoft.Data.Entity.Extensions;
 
 namespace Geek.Blog.Db.Repositories
 {
-    public class SqlPostRepository : IPosts
+    public class SqlPostRepository : BaseRepository<PostBody>, IPosts
     {
-        private DbContext _ctx1;
-
-        DbContext _ctx { get;}
-
-        internal SqlPostRepository(DbContext ctx)
+        internal SqlPostRepository(DbContext ctx): base(ctx)
         {
-            _ctx = ctx;
-        }
-
-        public SqlPostRepository()
-        {
-            var connectionString = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
-            DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
-            opts.UseSqlServer(connectionString);
-            _ctx = new BlogContext(opts.Options);
-        }
-
-        public SqlPostRepository(DbContext context)
-        {
-            this._ctx = context;
         }
 
         public CompletePost GetPost(string Url)
         {
-            var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).Where(o => o.PostHeader.Url == Url).FirstOrDefault();
+            var post = this.Entities.Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).Where(o => o.PostHeader.Url == Url).FirstOrDefault();
             return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
         }
 
         public  CompletePost GetPost(Guid Id)
         {
-            var count = _ctx.Set<PostBody>().Count();
-            var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Include(o=>o.PostHeader.PostMeta).Where(o => o.PostId== Id).FirstOrDefault();
+            var post = this.Entities.Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).FirstOrDefault(o => o.PostId == Id);
             return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
         }
 

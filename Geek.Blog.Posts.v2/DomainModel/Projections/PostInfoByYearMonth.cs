@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Geek.Blog.Posts.DomainModel
+namespace Geek.Blog.Posts.DomainModel.Projections
 {
     public class PostInfoByYearMonth : IGrouping<int, IGrouping<string, IEnumerable<BlogPostInfo>>>
     {
