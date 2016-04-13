@@ -30,6 +30,11 @@ namespace Geek.Blog.Db.Repositories
             _ctx = new BlogContext(opts.Options);
         }
 
+        public SqlPostRepository(DbContext context)
+        {
+            this._ctx = context;
+        }
+
         public CompletePost GetPost(string Url)
         {
             var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).Where(o => o.PostHeader.Url == Url).FirstOrDefault();

@@ -121,6 +121,7 @@
     <Compile Include="Database\Domain\PostMetadata.cs" />
     <Compile Include="Database\Domain\PostTags.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\ModelMappings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\SqlPostInfoRepository.cs" />
     <Compile Include="Repositories\SqlPostRepository.cs" />

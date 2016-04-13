@@ -53,19 +53,4 @@ namespace Microsoft.Data.Entity.Extensions
     }
 }
 
-namespace Geek.Blog.Db.Domain
-{
-    public static class MapExtensions
-    {
-        public static CompletePost MapCompletePost(this PostBody @this)
-        {
-            CompletePost cPost = new CompletePost(@this.PostHeader.Title, @this.PostHeader.Url, @this.PostHeader.PostMeta.IntroText, @this.PostText, @this.PostHeader.PostMeta.DateCreated, @this.PostHeader.PostMeta.LastModifed);
-            return cPost;
-        }
 
-        public static BlogPostInfo MapPostHeader(this PostHead @this)
-        {
-            return BlogPostInfo.Empty();
-        }
-    }
-}
