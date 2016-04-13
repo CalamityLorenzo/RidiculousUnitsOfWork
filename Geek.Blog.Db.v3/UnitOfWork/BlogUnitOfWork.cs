@@ -30,16 +30,11 @@ namespace Geek.Blog.Db.UnitOfWork
                 _ctx = new BlogContext(opts.Options);
             }
 
-            this.Posts = new SqlPostRepository();
+            this.Posts = new SqlPostRepository(_ctx);
+            this.PostInfo = new SqlPostInfoRepository(_ctx);
         }
 
-        public IPostInfo PostInfo
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public IPostsInfo PostInfo { get; }
 
         public IPosts Posts { get; }
         public ITags Tags

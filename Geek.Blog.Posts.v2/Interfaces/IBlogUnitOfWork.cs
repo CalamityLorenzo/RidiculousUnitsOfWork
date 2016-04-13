@@ -5,7 +5,7 @@ namespace Geek.Blog.Posts.Interfaces
     public interface IBlogUnitOfWork :IDisposable
     {
         IPosts Posts { get; }
-        IPostInfo PostInfo { get; }
+        IPostsInfo PostInfo { get; }
         ITags Tags {get;}
         void Complete();
     }

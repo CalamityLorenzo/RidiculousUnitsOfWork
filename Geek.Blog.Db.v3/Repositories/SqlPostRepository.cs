@@ -13,12 +13,14 @@ namespace Geek.Blog.Db.Repositories
 {
     public class SqlPostRepository : IPosts
     {
+        private DbContext _ctx1;
+
         DbContext _ctx { get;}
 
-        //internal SqlPostRepository(DbContext ctx)
-        //{
-        //    _ctx = ctx;
-        //}
+        internal SqlPostRepository(DbContext ctx)
+        {
+            _ctx = ctx;
+        }
 
         public SqlPostRepository()
         {
@@ -36,9 +38,7 @@ namespace Geek.Blog.Db.Repositories
 
         public  CompletePost GetPost(Guid Id)
         {
-
             var count = _ctx.Set<PostBody>().Count();
-
             var post = _ctx.Set<PostBody>().Include(o => o.PostHeader).Include(o=>o.PostHeader.PostMeta).Where(o => o.PostId== Id).FirstOrDefault();
             return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
         }

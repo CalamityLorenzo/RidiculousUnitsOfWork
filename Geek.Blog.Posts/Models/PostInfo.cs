@@ -30,8 +30,8 @@ namespace Geek.Blog.Posts.Models
             this.Month = Month;
             this.Count = Count;
         }
-        public string Month { get; private set; }
-        public int Count { get; private set; }
+        public string Month { get;  }
+        public int Count { get; }
 
         public override string ToString()
         {

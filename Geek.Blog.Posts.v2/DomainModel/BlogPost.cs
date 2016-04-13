@@ -23,23 +23,23 @@ namespace Geek.Blog.Posts.DomainModel
         public CompletePost(string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body)
         {
             this.DateCreated = created;
-            this.LastModified = lastModified;    
+            this.LastModified = lastModified;
         }
 
-        public CompletePost(string title, string url, string intro, string body, DateTime created)
+        public CompletePost(Guid Id, string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body, created, lastModified)
         {
-            this.Intro = intro;
-            this.Title = title;
-            this.Body = body;
-            this.Url = url;
-            this.DateCreated = created;
+            this.Id = Id;
+        }
+
+        public CompletePost(string title, string url, string intro, string body, DateTime created) : this(title, url, intro, body)
+        {
             this.LastModified = DateTime.Now;
         }
 
         public Guid Id { get; }
-        public string Title { get;  }
-        public string Url { get;  }
-        public string Intro { get;  }
+        public string Title { get; }
+        public string Url { get; }
+        public string Intro { get; }
         public string Body { get; }
         public DateTime DateCreated { get; protected set; }
         public DateTime LastModified { get; protected set; }

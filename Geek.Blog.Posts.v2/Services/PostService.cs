@@ -8,7 +8,7 @@ using Geek.Blog.Posts.Interfaces;
 
 namespace Geek.Blog.Posts.Services
 {
-    // Handles getting a full 
+    // Handles getting a full post
    public class PostService : IPostService
     {
         //private IBlogUnitOfWork blogData;
