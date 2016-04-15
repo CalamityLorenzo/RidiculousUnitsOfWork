@@ -5,8 +5,8 @@ namespace Geek.Blog.Posts.Services
 {
     public interface IPostService
     {
-        CompletePost GetPost(Guid Id);
-        CompletePost GetPost(string Url);
-        void UpdatePost(CompletePost updatedPost);
+        BlogPost GetPost(Guid Id);
+        BlogPost GetPost(string Url);
+        void UpdatePost(BlogPost updatedPost);
     }
 }

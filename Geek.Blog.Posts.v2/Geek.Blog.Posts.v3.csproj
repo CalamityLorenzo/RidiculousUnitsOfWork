@@ -42,7 +42,9 @@
   <ItemGroup>
     <Compile Include="DomainModel\BlogPost.cs" />
     <Compile Include="DomainModel\BlogPostInfo.cs" />
+    <Compile Include="DomainModel\BlogPostTag.cs" />
     <Compile Include="DomainModel\Projections\PostInfoByMonth.cs" />
+    <Compile Include="DomainModel\Projections\PostInfoByTag.cs" />
     <Compile Include="DomainModel\Projections\PostInfoByYearMonth.cs" />
     <Compile Include="Factories\IUnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IPosts.cs" />
@@ -54,9 +56,11 @@
     <Compile Include="Interfaces\IPostsInfo.cs" />
     <Compile Include="DomainModel\Projections\PostMonthCounts.cs" />
     <Compile Include="Interfaces\IPostsInfoService.cs" />
+    <Compile Include="Interfaces\ITagsService.cs" />
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\PostsInfoService.cs" />
     <Compile Include="DomainModel\Projections\PostYearMonthCounts.cs" />
+    <Compile Include="Services\TagsService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

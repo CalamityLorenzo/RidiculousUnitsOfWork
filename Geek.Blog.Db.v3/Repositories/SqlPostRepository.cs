@@ -18,19 +18,19 @@ namespace Geek.Blog.Db.Repositories
         {
         }
 
-        public CompletePost GetPost(string Url)
+        public BlogPost GetPost(string Url)
         {
             var post = this.Entities.Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).Where(o => o.PostHeader.Url == Url).FirstOrDefault();
-            return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
+            return post?.MapCompletePost() ?? BlogPost.Empty();
         }
 
-        public  CompletePost GetPost(Guid Id)
+        public  BlogPost GetPost(Guid Id)
         {
             var post = this.Entities.Include(o => o.PostHeader).Include(o => o.PostHeader.PostMeta).FirstOrDefault(o => o.PostId == Id);
-            return (post == null) ? CompletePost.Empty() : post.MapCompletePost();
+            return post?.MapCompletePost() ?? BlogPost.Empty();
         }
 
-        public  void UpdatePost(CompletePost post)
+        public  void UpdatePost(BlogPost post)
         {
             throw new NotImplementedException();
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Geek.Blog.Posts.DomainModel;
 
 namespace Geek.Blog.Db.Domain
 {
@@ -11,5 +12,6 @@ namespace Geek.Blog.Db.Domain
         public Guid PostId { get; set; }
         public string TagName { get; set; }
         public PostHead PostHeader { get; set; }
+
     }
 }

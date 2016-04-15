@@ -13,9 +13,9 @@ namespace Geek.Blog.Db.Domain
 {
     public static class MapExtensions
     {
-        public static CompletePost MapCompletePost(this PostBody @this)
+        public static BlogPost MapCompletePost(this PostBody @this)
         {
-            CompletePost cPost = new CompletePost(@this.PostHeader.Title, @this.PostHeader.Url, "", @this.PostText);
+            BlogPost cPost = new BlogPost(@this.PostId, @this.PostHeader.Title, @this.PostHeader.Url,@this.PostHeader.PostMeta.IntroText, @this.PostText, @this.PostHeader.PostMeta.DateCreated, @this.PostHeader.PostMeta.LastModifed);
             return cPost;
         }
 
@@ -29,6 +29,11 @@ namespace Geek.Blog.Db.Domain
             {
                 return new BlogPostInfo(@this.PostHeader.Title, @this.PostHeader.Url, @this.IntroText, @this.DateCreated, @this.LastModifed);
             }
+        }
+            
+        public static BlogPostTag MapBlogPostTag(this PostTags @this)
+        {
+            return new BlogPostTag(@this.TagName);
         }
     }
 }

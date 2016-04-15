@@ -5,8 +5,8 @@ namespace Geek.Blog.Posts.Interfaces
 {
     public interface IPosts
     {
-        CompletePost GetPost(Guid Id);
-        CompletePost GetPost(string Url);
-        void UpdatePost(CompletePost post);
+        BlogPost GetPost(Guid Id);
+        BlogPost GetPost(string Url);
+        void UpdatePost(BlogPost post);
     }
 }

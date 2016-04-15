@@ -126,6 +126,7 @@
     <Compile Include="Repositories\BaseRepository.cs" />
     <Compile Include="Repositories\SqlPostInfoRepository.cs" />
     <Compile Include="Repositories\SqlPostRepository.cs" />
+    <Compile Include="Repositories\SqlTagRepository.cs" />
     <Compile Include="UnitOfWork\BlogUnitOfWork.cs" />
     <Compile Include="UnitOfWork\UnitOfWorkFactory.cs" />
   </ItemGroup>

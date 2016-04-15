@@ -22,8 +22,14 @@ namespace PostTestsApi.v3
                 var postcPost = ps.GetPost(Guid.Parse("14E504A0-24FF-4C41-46B2-08D35BD7D2F1")); //Guid.Parse("36C92209-B7A7-4B9F-7A38-08D35BB5E001")
                                                                                                 // var postcPost = ps.GetPost("waggon-fuse-tricorn-dimethyltryptamines-immunoelectrophoretically-brucine-paisley-loitering-inherences");
                 Console.WriteLine(postcPost.Title + " " + postcPost.Url);
-                
-            }
+                IPostsInfoService pInfo = new PostsInfoService(blg.PostInfo);
+                var listOfInts = pInfo.GetAvailableYears();
+
+                foreach (var item in listOfInts)
+                {
+                    Console.WriteLine(item);
+                }
+            } 
 
 
         }

@@ -8,6 +8,7 @@ namespace Geek.Blog.Posts.Services
 {
     public interface IPostsInfoService
     {
+        IEnumerable<int> GetAvailableYears();
         IGrouping<int, PostMonthCounts> GetAvailablePostCountByYear(int year);
         BlogPostInfo GetPostInfo(string url);
         BlogPostInfo GetPostInfo(Guid id);

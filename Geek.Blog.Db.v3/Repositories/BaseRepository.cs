@@ -4,6 +4,7 @@ using Microsoft.Data.Entity.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,15 +22,13 @@ namespace Geek.Blog.Db.Repositories
             this.Entities = this.ctx.Set<TEntity>();
             this.ChangeTracker = this.ctx.Entry<TEntity>;
         }
-        
-        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
+        public IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate)
         {
             return this.Entities.Where(predicate).ToList();
         }
-        public TEntity FindFirstOrDefault(Func<TEntity, bool> predicate)
+        public TEntity FindFirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return this.Entities.FirstOrDefault(predicate);
         }
-        
     }
 }

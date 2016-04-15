@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Geek.Blog.Posts.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Posts.DomainModel
 {
-    public class CompletePost
+    public class BlogPost
     {
-        internal CompletePost() { }
+        internal BlogPost() { }
 
-        public CompletePost(string title, string url, string intro, string body)
+
+
+        public BlogPost(string title, string url, string intro, string body)
         {
             this.Intro = intro;
             this.Title = title;
@@ -20,18 +23,18 @@ namespace Geek.Blog.Posts.DomainModel
             this.LastModified = DateTime.Now;
         }
 
-        public CompletePost(string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body)
+        public BlogPost(string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body)
         {
             this.DateCreated = created;
             this.LastModified = lastModified;
         }
 
-        public CompletePost(Guid Id, string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body, created, lastModified)
+        public BlogPost(Guid Id, string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body, created, lastModified)
         {
             this.Id = Id;
         }
 
-        public CompletePost(string title, string url, string intro, string body, DateTime created) : this(title, url, intro, body)
+        public BlogPost(string title, string url, string intro, string body, DateTime created) : this(title, url, intro, body)
         {
             this.LastModified = DateTime.Now;
         }
@@ -43,10 +46,12 @@ namespace Geek.Blog.Posts.DomainModel
         public string Body { get; }
         public DateTime DateCreated { get; protected set; }
         public DateTime LastModified { get; protected set; }
+        
+        public ITagsForPost Tags { get; }
 
-        public static CompletePost Empty()
+        public static BlogPost Empty()
         {
-            return new CompletePost();
+            return new BlogPost();
         }
     }
 }

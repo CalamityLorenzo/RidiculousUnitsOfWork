@@ -18,17 +18,17 @@ namespace Geek.Blog.Posts.Services
             this.Posts = blogData;
         }
 
-        public CompletePost GetPost(Guid Id)
+        public BlogPost GetPost(Guid Id)
         {
             return this.Posts.GetPost(Id);
         }
 
-        public CompletePost GetPost(string Url)
+        public BlogPost GetPost(string Url)
         {
             return this.Posts.GetPost(Url);
         }
 
-        public void UpdatePost(CompletePost updatedPost)
+        public void UpdatePost(BlogPost updatedPost)
         {
             throw new NotImplementedException();
         }

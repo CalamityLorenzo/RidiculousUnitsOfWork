@@ -17,7 +17,7 @@ namespace Geek.Blog.Posts.Services
             this.postInfo = postInfo;
         }
 
-        IEnumerable<int> GetAllAvailableYears()
+       public IEnumerable<int> GetAvailableYears()
         {
             return this.postInfo.GetAllYears();
         }
