@@ -14,6 +14,8 @@ namespace Geek.Blog.Db.UnitOfWork
 {
     public class SqlBlogUnitOfWork : IBlogUnitOfWork
     {
+        private bool _disposed = false;
+
         private bool hasSaved = false;
         private DbContext _ctx { get; }
         internal SqlBlogUnitOfWork(DbContext Context)
@@ -23,20 +25,6 @@ namespace Geek.Blog.Db.UnitOfWork
             this.PostInfo = new SqlPostInfoRepository(_ctx);
             this.Tags = new SqlTagRepository(_ctx);
         }
-
-        //public BlogUnitOfWork()
-        //{
-        //    if (_ctx == null)
-        //    {
-        //        var connectionString = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
-        //        DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
-        //        opts.UseSqlServer(connectionString);
-        //        _ctx = new BlogContext(opts.Options);
-        //   //     _ctx.LogToConsole();
-        //    }
-
-           
-        //}
 
         public IPostsInfo PostInfo { get; }
 
@@ -50,16 +38,36 @@ namespace Geek.Blog.Db.UnitOfWork
 
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+            if (disposing)
+            {
+                if (_ctx != null)
+                {
+                    _ctx.Dispose();
+                }
+            }
+            _disposed = true;
+
+
+        }
+
         public void Dispose()
         {
-            if (_ctx != null)
+            if (hasSaved != true)
             {
-                if (hasSaved != true)
-                {
-                    _ctx.SaveChanges();
-                }
-                _ctx.Dispose();
+                _ctx.SaveChanges();
             }
+
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~SqlBlogUnitOfWork()
+        {
+            Dispose(false);
         }
     }
 }

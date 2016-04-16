@@ -11,13 +11,13 @@ namespace Geek.Blog.Posts.Services
     // instantiate this, you create the entire application
     public class BlogManager : IDisposable
     {
-
-
+        private bool _disposed = false;
         public IPostService PostService { get; }
         public IPostsInfoService PostInfo { get; }
         public ITagsService PostTags { get; }
         private IBlogUnitOfWork bunitOfWork;
-        public BlogManager(IBlogUnitOfWork blogData)
+
+        private BlogManager(IBlogUnitOfWork blogData)
         {
             PostService = new PostService(blogData.Posts);
             PostInfo = new PostsInfoService(blogData.PostInfo);
@@ -27,10 +27,36 @@ namespace Geek.Blog.Posts.Services
 
         public void Dispose()
         {
-           if(bunitOfWork != null)
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~BlogManager()
+        {
+            Dispose(false);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+                return;
+
+            if (disposing)
             {
                 this.bunitOfWork.Dispose();
             }
+
+            _disposed = true;
+        }
+        public static Func<IBlogUnitOfWork> SetConnection { get; set; }
+
+        public static BlogManager Create()
+        {
+            if (SetConnection == null)
+            {
+                throw new ArgumentNullException("Set Connection must be assigned");
+            }
+            return new BlogManager(SetConnection());
         }
     }
 }

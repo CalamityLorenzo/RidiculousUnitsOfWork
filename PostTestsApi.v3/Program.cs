@@ -28,16 +28,15 @@ namespace PostTestsApi.v3
     {
         static void Main(string[] args)
         {
+            BlogManager.SetConnection = () => UnitOfWorkFactory.Instance.ReadWrite(); 
+
             BlogPost bp = new BlogPost("My New Post", "Holy-poster-moley", "this is a new text", "total complete bastards eatiing foops", DateTime.Now);
-            using (IBlogUnitOfWork blg = UnitOfWorkFactory.Instance.ReadWrite())
+            BlogPost bp2 = new BlogPost("Another Clever post", "Crazy-post-Craze", "SAupposedf ways of creaeting information about your applicvation", "May the lorem ipsum of lipsum lorem be faithful", DateTime.Now, DateTime.Now);
+            using (BlogManager Bm = BlogManager.Create())
             {
-                BlogManager Bm = new BlogManager(blg);
                 Bm.PostService.AddPost(bp);
-                blg.Complete();
-
             }
-
-
+        
         }
     }
 }
