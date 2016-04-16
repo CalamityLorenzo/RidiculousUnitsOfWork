@@ -28,12 +28,13 @@ namespace PostTestsApi.v3
     {
         static void Main(string[] args)
         {
-            BlogPost bp = new BlogPost("My New Post", "New-post", "this is a new text", "total complete bastards eatiing foops", DateTime.Now);
+            BlogPost bp = new BlogPost("My New Post", "Holy-poster-moley", "this is a new text", "total complete bastards eatiing foops", DateTime.Now);
             using (IBlogUnitOfWork blg = UnitOfWorkFactory.Instance.ReadWrite())
             {
                 BlogManager Bm = new BlogManager(blg);
                 Bm.PostService.AddPost(bp);
                 blg.Complete();
+
             }
 
 

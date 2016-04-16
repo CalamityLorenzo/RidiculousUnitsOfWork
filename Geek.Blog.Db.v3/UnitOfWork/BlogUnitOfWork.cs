@@ -12,31 +12,31 @@ using System.Threading.Tasks;
 
 namespace Geek.Blog.Db.UnitOfWork
 {
-    public class BlogUnitOfWork : IBlogUnitOfWork
+    public class SqlBlogUnitOfWork : IBlogUnitOfWork
     {
         private bool hasSaved = false;
         private DbContext _ctx { get; }
-        internal BlogUnitOfWork(DbContext Context):this()
+        internal SqlBlogUnitOfWork(DbContext Context)
         {
             _ctx = Context;
-
-        }
-
-        public BlogUnitOfWork()
-        {
-            if (_ctx == null)
-            {
-                var connectionString = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
-                DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
-                opts.UseSqlServer(connectionString);
-                _ctx = new BlogContext(opts.Options);
-           //     _ctx.LogToConsole();
-            }
-
             this.Posts = new SqlPostRepository(_ctx);
             this.PostInfo = new SqlPostInfoRepository(_ctx);
             this.Tags = new SqlTagRepository(_ctx);
         }
+
+        //public BlogUnitOfWork()
+        //{
+        //    if (_ctx == null)
+        //    {
+        //        var connectionString = ConfigurationManager.ConnectionStrings["ReadWrite"].ConnectionString;
+        //        DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
+        //        opts.UseSqlServer(connectionString);
+        //        _ctx = new BlogContext(opts.Options);
+        //   //     _ctx.LogToConsole();
+        //    }
+
+           
+        //}
 
         public IPostsInfo PostInfo { get; }
 

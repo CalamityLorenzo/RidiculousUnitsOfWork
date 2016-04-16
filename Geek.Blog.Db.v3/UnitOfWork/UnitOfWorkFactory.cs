@@ -22,12 +22,12 @@ namespace Geek.Blog.Db.UnitOfWork
 
         public IBlogUnitOfWork Readonly()
         {
-            return Instance.GetUnitOfWork<BlogUnitOfWork, BlogContext>("Readonly");
+            return Instance.GetUnitOfWork<SqlBlogUnitOfWork, BlogContext>("Readonly")();
         }
 
         public IBlogUnitOfWork ReadWrite()
         {
-            return Instance.GetUnitOfWork<BlogUnitOfWork, BlogContext>("ReadWrite");
+            return Instance.GetUnitOfWork<SqlBlogUnitOfWork, BlogContext>("ReadWrite")();
         }
 
         public void RecreateDb()
@@ -42,16 +42,16 @@ namespace Geek.Blog.Db.UnitOfWork
             }
         }
 
-        public TUnitOfWork GetUnitOfWork<TUnitOfWork, C>(string connectionName) where TUnitOfWork : class, IBlogUnitOfWork where C : BlogContext
+        public Func<TUnitOfWork> GetUnitOfWork<TUnitOfWork, C>(string connectionName) where TUnitOfWork : class, IBlogUnitOfWork where C : BlogContext
         {
             var connectionString = ConfigurationManager.ConnectionStrings[connectionName].ConnectionString;
             DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
             opts.UseSqlServer(connectionString);
 
             var ctx = GetContext<C>();
-            if (typeof(TUnitOfWork) == typeof(BlogUnitOfWork))
+            if (typeof(TUnitOfWork) == typeof(SqlBlogUnitOfWork))
             {
-                return new BlogUnitOfWork(ctx(opts.Options)) as TUnitOfWork;
+                return ()=>  new SqlBlogUnitOfWork(ctx(opts.Options)) as TUnitOfWork;
             }
 
             throw new ArgumentOutOfRangeException("Cannot construct Uow");
