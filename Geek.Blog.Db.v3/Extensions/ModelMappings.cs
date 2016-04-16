@@ -15,7 +15,7 @@ namespace Geek.Blog.Db.Domain
     {
         public static BlogPost MapCompletePost(this PostBody @this)
         {
-            BlogPost cPost = new BlogPost(@this.PostId, @this.PostHeader.Title, @this.PostHeader.Url,@this.PostHeader.PostMeta.IntroText, @this.PostText, @this.PostHeader.PostMeta.DateCreated, @this.PostHeader.PostMeta.LastModifed);
+            BlogPost cPost = new BlogPost(@this.PostId, @this.PostHeader.Title, @this.PostHeader.Url,@this.PostHeader.PostMeta.IntroText, @this.PostText,new List<string>(),  @this.PostHeader.PostMeta.DateCreated, @this.PostHeader.PostMeta.LastModifed);
             return cPost;
         }
 

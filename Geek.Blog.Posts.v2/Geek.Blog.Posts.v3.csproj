@@ -49,6 +49,7 @@
     <Compile Include="Factories\IUnitOfWorkFactory.cs" />
     <Compile Include="Interfaces\IPosts.cs" />
     <Compile Include="Interfaces\ITags.cs" />
+    <Compile Include="Interfaces\ITagsForPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\BlogManager.cs" />
     <Compile Include="Interfaces\IBlogUnitOfWork.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Services\PostService.cs" />
     <Compile Include="Services\PostsInfoService.cs" />
     <Compile Include="DomainModel\Projections\PostYearMonthCounts.cs" />
+    <Compile Include="Services\TagsForPostService.cs" />
     <Compile Include="Services\TagsService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

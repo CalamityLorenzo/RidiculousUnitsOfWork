@@ -1,4 +1,5 @@
 ﻿using Geek.Blog.Posts.Interfaces;
+using Geek.Blog.Posts.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,6 @@ namespace Geek.Blog.Posts.DomainModel
     public class BlogPost
     {
         internal BlogPost() { }
-
-
 
         public BlogPost(string title, string url, string intro, string body)
         {
@@ -29,9 +28,11 @@ namespace Geek.Blog.Posts.DomainModel
             this.LastModified = lastModified;
         }
 
-        public BlogPost(Guid Id, string title, string url, string intro, string body, DateTime created, DateTime lastModified) : this(title, url, intro, body, created, lastModified)
+        public BlogPost(Guid Id, string title, string url, string intro, string body, IEnumerable<string> Tags, DateTime created, DateTime lastModified) : this(title, url, intro, body, created, lastModified)
         {
             this.Id = Id;
+            this.Tags = new List<string>(Tags);
+
         }
 
         public BlogPost(string title, string url, string intro, string body, DateTime created) : this(title, url, intro, body)
@@ -47,7 +48,7 @@ namespace Geek.Blog.Posts.DomainModel
         public DateTime DateCreated { get; protected set; }
         public DateTime LastModified { get; protected set; }
         
-        public ITagsForPost Tags { get; }
+        public IEnumerable<string> Tags { get; }
 
         public static BlogPost Empty()
         {

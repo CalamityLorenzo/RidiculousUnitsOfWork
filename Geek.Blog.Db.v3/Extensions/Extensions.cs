@@ -1,5 +1,8 @@
 ﻿using Geek.Blog.Posts.DomainModel;
 using Microsoft.Data.Entity.Infrastructure;
+using Microsoft.Data.Entity.Internal;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +54,19 @@ namespace Microsoft.Data.Entity.Extensions
             return query.FirstOrDefault();
         }
     }
+
+    public static class DbContextExtensions
+    {
+        public static void LogToConsole(this DbContext context)
+        {
+
+            var contextServices = ((IInfrastructure<IServiceProvider>)context).Instance;
+            var loggerFactory = contextServices.GetRequiredService<ILoggerFactory>();
+            loggerFactory.AddConsole(LogLevel.Verbose);
+
+        }
+    }
+
 }
 
 

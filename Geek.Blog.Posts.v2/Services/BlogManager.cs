@@ -9,12 +9,16 @@ namespace Geek.Blog.Posts.Services
 {
     // Handles the connections and stuff
     // instantiate this, you create the entire application
-    //class BlogManager
-    //{
-    //    public PostService PostService { get; }
-    //    public BlogManager(IBlogUnitOfWork blogData)
-    //    {
-    //        PostService = new PostService(blogData);
-    //    }
-    //}
+    public class BlogManager
+    {
+        public IPostService PostService { get; }
+        public IPostsInfoService PostInfo { get; }
+        public ITagsService PostTags { get; }
+        public BlogManager(IBlogUnitOfWork blogData)
+        {
+            PostService = new PostService(blogData.Posts);
+            PostInfo = new PostsInfoService(blogData.PostInfo);
+            PostTags = new TagsService(blogData.Tags);
+        }
+    }
 }

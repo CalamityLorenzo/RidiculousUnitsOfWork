@@ -32,5 +32,10 @@ namespace Geek.Blog.Posts.Services
         {
             throw new NotImplementedException();
         }
+
+        public void AddPost(BlogPost newPost)
+        {
+            Posts.AddPost(newPost);
+        }
     }
 }

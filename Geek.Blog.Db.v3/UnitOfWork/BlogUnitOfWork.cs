@@ -1,6 +1,7 @@
 ﻿using Geek.Blog.Db.Repositories;
 using Geek.Blog.Posts.Interfaces;
 using Microsoft.Data.Entity;
+using Microsoft.Data.Entity.Extensions;
 using Microsoft.Data.Entity.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace Geek.Blog.Db.UnitOfWork
         internal BlogUnitOfWork(DbContext Context):this()
         {
             _ctx = Context;
+
         }
 
         public BlogUnitOfWork()
@@ -28,22 +30,18 @@ namespace Geek.Blog.Db.UnitOfWork
                 DbContextOptionsBuilder opts = new DbContextOptionsBuilder();
                 opts.UseSqlServer(connectionString);
                 _ctx = new BlogContext(opts.Options);
+           //     _ctx.LogToConsole();
             }
 
             this.Posts = new SqlPostRepository(_ctx);
             this.PostInfo = new SqlPostInfoRepository(_ctx);
+            this.Tags = new SqlTagRepository(_ctx);
         }
 
         public IPostsInfo PostInfo { get; }
 
         public IPosts Posts { get; }
-        public ITags Tags
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
+        public ITags Tags { get; }
 
         public void Complete()
         {
@@ -61,7 +59,6 @@ namespace Geek.Blog.Db.UnitOfWork
                     _ctx.SaveChanges();
                 }
                 _ctx.Dispose();
-
             }
         }
     }

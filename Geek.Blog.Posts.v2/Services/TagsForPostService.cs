@@ -23,7 +23,7 @@ namespace Geek.Blog.Posts.Services
         {
             get
             {
-                return allTags ?? (allTags = tags.GetTags(this.PostId).Select(tg => tg.Text);
+                return allTags ?? (allTags = tags.GetTags(this.PostId).Select(tg => tg.Text));
             }
         }
 

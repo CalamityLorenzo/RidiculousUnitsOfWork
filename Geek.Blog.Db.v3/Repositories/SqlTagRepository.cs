@@ -33,21 +33,22 @@ namespace Geek.Blog.Db.Repositories
             return new PostInfoByTag(tagName, PostInfo.Select(o => o.PostHeader.PostMeta.MapBlogPostInfo()));
         }
 
-        public BlogPostTag GetTag(Guid id, string tag)
+        public BlogPostTag GetTag(Guid PostId, string tag)
         {
-            var postTag = this.Entities.FirstOrDefault(o => o.PostId == id && o.TagName == tag);
+            var postTag = this.Entities.FirstOrDefault(o => o.PostId == PostId && o.TagName == tag);
             return postTag?.MapBlogPostTag() ?? BlogPostTag.Empty();
         }
 
-        public IEnumerable<BlogPostTag> GetTags(Guid id)
+        public IEnumerable<BlogPostTag> GetTags(Guid PostId)
         {
-            var tags = this.Entities.Where(o => o.PostId == id);
+            var tags = this.Entities.Where(o => o.PostId == PostId);
             return tags.Select(o => o.MapBlogPostTag()).ToList();
         }
 
         public void RemoveTagFromPost(Guid PostId, string Tag)
         {
-            throw new NotImplementedException();
+            var postTag = this.Entities.FirstOrDefault(o => o.PostId == PostId && o.TagName == Tag);
+            this.Entities.Remove(postTag);
         }
     }
 }

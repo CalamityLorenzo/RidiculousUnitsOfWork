@@ -8,5 +8,6 @@ namespace Geek.Blog.Posts.Interfaces
         BlogPost GetPost(Guid Id);
         BlogPost GetPost(string Url);
         void UpdatePost(BlogPost post);
+        void AddPost(BlogPost newPost);
     }
 }

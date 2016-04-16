@@ -8,28 +8,33 @@ using System.Reflection;
 using Geek.Blog.Posts.Services;
 using Geek.Blog.Db.Repositories;
 using Geek.Blog.Db.UnitOfWork;
+using Geek.Blog.Posts.DomainModel;
 
 namespace PostTestsApi.v3
 {
+    //IPostService ps = new PostService(blg.Posts);
+    //var postcPost = ps.GetPost(Guid.Parse("14E504A0-24FF-4C41-46B2-08D35BD7D2F1")); //Guid.Parse("36C92209-B7A7-4B9F-7A38-08D35BB5E001")
+    //                                                                                // var postcPost = ps.GetPost("waggon-fuse-tricorn-dimethyltryptamines-immunoelectrophoretically-brucine-paisley-loitering-inherences");
+    //Console.WriteLine(postcPost.Title + " " + postcPost.Url);
+    //            IPostsInfoService pInfo = new PostsInfoService(blg.PostInfo);
+    //var listOfInts = pInfo.GetAvailableYears();
+
+    //            foreach (var item in listOfInts)
+    //            {
+    //                Console.WriteLine(item);
+    //            }
+
     class Program
     {
         static void Main(string[] args)
         {
-
-            using (IBlogUnitOfWork blg = UnitOfWorkFactory.Instance.Readonly())
+            BlogPost bp = new BlogPost("My New Post", "New-post", "this is a new text", "total complete bastards eatiing foops", DateTime.Now);
+            using (IBlogUnitOfWork blg = UnitOfWorkFactory.Instance.ReadWrite())
             {
-                IPostService ps = new PostService(blg.Posts);
-                var postcPost = ps.GetPost(Guid.Parse("14E504A0-24FF-4C41-46B2-08D35BD7D2F1")); //Guid.Parse("36C92209-B7A7-4B9F-7A38-08D35BB5E001")
-                                                                                                // var postcPost = ps.GetPost("waggon-fuse-tricorn-dimethyltryptamines-immunoelectrophoretically-brucine-paisley-loitering-inherences");
-                Console.WriteLine(postcPost.Title + " " + postcPost.Url);
-                IPostsInfoService pInfo = new PostsInfoService(blg.PostInfo);
-                var listOfInts = pInfo.GetAvailableYears();
-
-                foreach (var item in listOfInts)
-                {
-                    Console.WriteLine(item);
-                }
-            } 
+                BlogManager Bm = new BlogManager(blg);
+                Bm.PostService.AddPost(bp);
+                blg.Complete();
+            }
 
 
         }

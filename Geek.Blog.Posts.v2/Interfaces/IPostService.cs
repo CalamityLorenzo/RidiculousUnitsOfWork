@@ -8,5 +8,6 @@ namespace Geek.Blog.Posts.Services
         BlogPost GetPost(Guid Id);
         BlogPost GetPost(string Url);
         void UpdatePost(BlogPost updatedPost);
+        void AddPost(BlogPost AddPost);
     }
 }
